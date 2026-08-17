@@ -878,7 +878,7 @@
                     <div class="glass-card service-card tilt-card">
                         <div class="service-icon"><i class="bi bi-filetype-py"></i></div>
                         <h4 class="text-white h5 fw-bold mb-3">Python Web Applications</h4>
-                        <p class="text-muted small">Data-intensive web applications, background automation scripts, scraped data pipelines, and intelligent backends using Django/Flask.</p>
+                        <p class="text-muted small">Data-intensive web applications, background automation scripts, scraped data pipelines, and intelligent backends using FastApi/Flask.</p>
                     </div>
                 </div>
 
@@ -1066,7 +1066,7 @@
 
                         <div class="mb-3">
                             <div class="d-flex justify-content-between text-muted small mb-1">
-                                <span>Python / Django / Flask</span>
+                                <span>Python / FastApi / Flask</span>
                                 <span class="font-code">85%</span>
                             </div>
                             <div class="progress bg-dark" style="height: 6px;">
@@ -1120,7 +1120,7 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-8 reveal">
                     <div class="glass-card p-4 p-md-5 tilt-card">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formsubmit.co/vv9998003@gmail.com" method="POST">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Your Name *</label>
@@ -1140,7 +1140,7 @@
                                     <select class="form-select" id="projectType" required>
                                         <option value="" selected disabled>Select project type</option>
                                         <option value="PHP Web App">Custom PHP Application</option>
-                                        <option value="Python App">Python / Django Project</option>
+                                        <option value="Python App">Python / FastApi Project</option>
                                         <option value="Student Project">Student / Academic Project</option>
                                         <option value="Business System">Business Management System</option>
                                         <option value="Dashboard">Admin Dashboard Portal</option>
@@ -1253,7 +1253,7 @@
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript -->
+   <!-- Custom JavaScript -->
     <script>
         // Set dynamic current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -1277,7 +1277,7 @@
             spotlight.style.display = 'none';
         }
 
-        // 3. CANVAS BACKGROUND ANIMATION (Layered Futuristic Grid & Interactive Particles)
+        // 3. CANVAS BACKGROUND ANIMATION
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -1311,7 +1311,6 @@
         function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw subtle tech grid pattern
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
             ctx.lineWidth = 1;
             const gridSize = 60;
@@ -1328,7 +1327,6 @@
                 ctx.stroke();
             }
 
-            // Draw and update glowing network particles
             particles.forEach((p, index) => {
                 p.x += p.vx;
                 p.y += p.vy;
@@ -1336,7 +1334,6 @@
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-                // Mouse interaction effect
                 if (mouse.x !== null && mouse.y !== null) {
                     const dx = mouse.x - p.x;
                     const dy = mouse.y - p.y;
@@ -1354,7 +1351,6 @@
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Connect particles with translucent glowing threads
                 for (let j = index + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
@@ -1372,7 +1368,7 @@
         }
         animateCanvas();
 
-        // 4. SMOOTH 3D PERSPECTIVE PARALLAX TILT ON CARDS (Performance Optimized)
+        // 4. SMOOTH 3D PERSPECTIVE PARALLAX TILT ON CARDS
         const tiltCards = document.querySelectorAll('.tilt-card, .service-card');
         if (window.innerWidth > 991) {
             tiltCards.forEach(card => {
@@ -1380,10 +1376,8 @@
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    
                     const rotateX = ((y - centerY) / centerY) * -8;
                     const rotateY = ((x - centerX) / centerX) * 8;
                     
@@ -1400,12 +1394,9 @@
 
         // 5. INTERSECTION OBSERVER FOR SCROLL REVEAL ANIMATIONS
         const revealElements = document.querySelectorAll('.reveal');
-        const observerOptions = {
-            threshold: 0.12,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -50px 0px' };
 
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
@@ -1469,9 +1460,8 @@
             });
         });
 
-        // Close mobile nav menu on link click
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            link.link?.addEventListener('click', () => {
                 if (navbarCollapse.classList.contains('show')) {
                     const bsCollapse = new bootstrap.Collapse(navbarCollapse);
                     bsCollapse.hide();
@@ -1479,7 +1469,7 @@
             });
         });
 
-        // 8. CONTACT FORM SUBMISSION FRONTEND HANDLING
+        // 8. FORM SUBMISSION: REDIRECTS TO WHATSAPP & TRIGGERS EMAIL
         const contactForm = document.getElementById('contactForm');
         const contactToast = document.getElementById('contactToast');
 
@@ -1487,8 +1477,33 @@
             e.preventDefault();
 
             if (contactForm.checkValidity()) {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const projectType = document.getElementById('projectType').value;
+                const budget = document.getElementById('budget').value;
+                const requirements = document.getElementById('requirements').value;
+
+                // 1. Format and Open WhatsApp with inquiry details
+                const whatsappMessage = `*New Project Inquiry - DevStudio*\n\n*Name:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Category:* ${projectType}\n*Budget:* ${budget}\n*Requirements:* ${requirements}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/918660057906?text=${encodedMessage}`;
+
+                // 2. Trigger Client-Side Email (Mailto fallback to user's email client addressed to your Gmail)
+                const mailtoSubject = encodeURIComponent(`New Project Inquiry: ${projectType} from ${name}`);
+                const mailtoBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nProject Type: ${projectType}\nBudget: ${budget}\n\nRequirements:\n${requirements}`);
+                const mailtoUrl = `mailto:vv9998003@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+                // Show Success Toast Notification
                 const toast = new bootstrap.Toast(contactToast);
                 toast.show();
+
+                // Open WhatsApp in a new tab and trigger mail client after a brief delay
+                window.open(whatsappUrl, '_blank');
+                setTimeout(() => {
+                    window.location.href = mailtoUrl;
+                }, 1000);
+
                 contactForm.reset();
             } else {
                 contactForm.reportValidity();
